@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+#include <algorithm> // For sort function
 
 // finding the index of pair of numbers that sum to a given number
 
@@ -93,26 +94,86 @@ using namespace std;
 
 // Majority Element
 
+// int main()
+// {
+//     vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
+//     int majorityTimes = arr.size() / 2;
+//     for (size_t i = 0; i < arr.size(); i++)
+//     {
+//         int times = 0;
+//         for (int j = 0; j < arr.size(); j++)
+//         {
+//             if (arr[i] == arr[j])
+//             {
+//                 times++;
+//             }
+//         }
+//         if (times >= majorityTimes)
+//         {
+//             cout << "Majority element is: " << arr[i] << endl;
+//             return 0; // Exit after finding the first majority element
+//         }
+//     }
+
+//     return 0;
+// }
+
+// // Majority element better approach
+// int main()
+// {
+//     vector<int> arr = {1, 1, 2, 1, 2, 2, 2};
+//     int majorityTimes = arr.size() / 2;
+//     int n = arr.size();
+
+//     sort(arr.begin(), arr.end());
+//     int freq = 1;
+//     int ans = arr[0];
+//     for (int i = 1; i < n; i++)
+//     {
+//         if (arr[i] == arr[i - 1])
+//         {
+//             freq++;
+//         }
+//         else
+//         {
+//             freq = 1;
+//             ans = arr[i];
+//         }
+
+//         if (freq >= majorityTimes)
+//         {
+//             return ans;
+//         }
+//     }
+//     cout << "Majority element is: " << ans << endl;
+
+//     return 0;
+// }
+
+// Majority element moore's voting algorithm
+
 int main()
 {
-    vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
-    int majorityTimes = arr.size() / 2;
-    for (size_t i = 0; i < arr.size(); i++)
+    vector<int> arr = {2, 1, 1, 1, 2, 1, 2, 1};
+    int freq = 0;
+    int ans = 0;
+    for (int i = 0; i < arr.size(); i++)
     {
-        int times = 0;
-        for (int j = 0; j < arr.size(); j++)
+        if (freq == 0)
         {
-            if (arr[i] == arr[j])
-            {
-                times++;
-            }
+            ans = arr[i];
+            freq = 1;
         }
-        if (times >= majorityTimes)
+        else if (arr[i] == ans)
         {
-            cout << "Majority element is: " << arr[i] << endl;
-            return 0; // Exit after finding the first majority element
+            freq++;
+        }
+        else
+        {
+            freq--;
         }
     }
+    cout << "Majority element is: " << ans << endl;
 
     return 0;
 }
